@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   hmr: false,
   api: 'http://localhost:1337',
+  apiv2: 'http://54.186.188.145:3000/',
   github: false,
   targetAPI: true,
 };

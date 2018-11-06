@@ -87,6 +87,10 @@ export class IotRequestsService {
     );
   }
 
+  public get_Devices () {
+    return this.http.get(environment.apiv2 + 'api/devices');
+  }
+
   public async GetDeviceDayHistory(id: number, date: Date): Promise<IResponse<number>> {
     const url = environment.api + '/api/devices/day-history/' + date + '/' + id;
     const ref = this.http.get(url).toPromise();

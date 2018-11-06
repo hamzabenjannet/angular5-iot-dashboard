@@ -1,9 +1,10 @@
-<app-error-message *ngIf="devices.length === 0">
-    There are no devices. Please create devices and you will be able to manage them here.
+<app-error-message *ngIf="Devices.length === 0">
+  There are no devices. Please create devices and you will be able to manage them here.
 </app-error-message>
 
 <app-page-container maintitle="Devices" subtitle="All of your Devices in your environment">
-  <a class="btn btn-primary add-button" routerLink="../device/create" action-button translate>Connect a new device</a>
+  <!-- <a class="btn btn-primary add-button" routerLink="../device/create" action-button translate>Connect a new device</a> -->
+  
   <div ngx-sidebar-off class="table-responsive iot-table">
     <table class="table app-devices-table">
       <thead>
@@ -17,7 +18,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let source of unconnected" class="unconnected-row" >
+        <tr *ngFor="let device of Devices" class="app-devices-row">
+          <td>{{device.meta.name}}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <a [routerLink]="'/device/' + device.device_id "><i [Tooltip]="'Edit'" class="icon-mode_edit action-btn"></i></a>
+            <a (click)="DeleteDevice(device)"><i [Tooltip]="'Delete'" class="icon-delete action-btn"></i></a>
+            <app-if-experimental>
+              <a [routerLink]="'/device/events-and-actions/' + device.device_id ">
+                <i [Tooltip]="'Manage'" class="icon-av_timer action-btn"></i>
+              </a>
+            </app-if-experimental>
+          </td>
+        </tr>
+        <!-- <tr *ngFor="let source of unconnected" class="unconnected-row" >
           <td>N/A</td>
           <td>{{source.dataSourceId}}</td>
           <td>
@@ -51,8 +68,9 @@
               </a>
             </app-if-experimental>
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>
 </app-page-container>
+

@@ -15,6 +15,7 @@ import { IotRequestsService } from '@app/iot/iot-requests.service';
 export class DevicesComponent implements  OnInit, OnDestroy {
 
   public devices: Array<any> = [];
+  public Devices;
   public unconnected: Array<DataSource> = [];
   public locations: Array<ILocation> = [];
   private _ref1: any  = null;
@@ -31,16 +32,22 @@ export class DevicesComponent implements  OnInit, OnDestroy {
    }
 
   ngOnInit() {
-    this._ref1 = this.store.select('iotModule').subscribe(({devices}) => {
-      this.devices = devices;
-    });
+    // this._ref1 = this.store.select('iotModule').subscribe(({devices}) => {
+    //   this.devices = devices;
+    // });
     this._ref2 = this.store.select('iotModule').subscribe(({locations}) => {
       this.locations = (locations as Array<ILocation>);
     });
     this.store.select('iotModule').subscribe(({unconnectedSources}) => {
       this.unconnected = unconnectedSources;
     });
-    this.requests.getDevices();
+    // this.requests.getDevices();
+    this.requests.get_Devices().subscribe( res_devices => {
+      this.Devices = res_devices;
+      console.log( this.Devices );
+      
+
+    } );
   }
   public FormatDate (value: Date) {
     if ( ! value ) {
